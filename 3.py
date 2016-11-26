@@ -9,6 +9,9 @@ def is_prime(x):
     if x <= 2:
         return True
 
+    if x % 2 == 0:
+        return False
+
     for i in xrange(3, int(x ** 0.5) + 1, 2):
         if x % i == 0:
             return False
@@ -21,7 +24,7 @@ def is_factor(x, y):
 def largest_prime_factor(n):
 
     prime_factors = []
-    
+
     for i in xrange(1, int(n ** 0.5) + 1):
 
         if is_factor(i, n):
