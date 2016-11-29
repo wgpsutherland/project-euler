@@ -18,10 +18,15 @@ def is_pythagorean_triplet(a, b, c):
     return (a * a) + (b * b) == c * c
 
 def triplet_sum_is_n(n):
-    for a in xrange(0, 1000):
-        for b in xrange(a + 1, 1000):
-            for c in xrange(b + 1, 1000):
-                if a + b + c == n and is_pythagorean_triplet(a, b, c):
-                    return a, b, c, a * b * c
+    for a in xrange(0, n):
+        for b in xrange(a + 1, n):
+
+            c = n - a - b
+
+            if c <= b:
+                break
+
+            if is_pythagorean_triplet(a, b, c):
+                return a, b, c, a * b * c
 
 print triplet_sum_is_n(1000)
