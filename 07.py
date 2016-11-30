@@ -6,8 +6,11 @@
 # What is the 10 001st prime number?
 
 def is_prime(x):
+
+    if x < 2:
+        return False
     
-    if x <= 2:
+    if x == 2:
         return True
 
     if x % 2 == 0:

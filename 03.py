@@ -5,8 +5,11 @@
 # What is the largest prime factor of the number 600851475143 ?
 
 def is_prime(x):
+
+    if x < 2:
+        return False
     
-    if x <= 2:
+    if x == 2:
         return True
 
     if x % 2 == 0:
