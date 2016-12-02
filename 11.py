@@ -3,12 +3,6 @@
 
 import numpy as np
 
-def product(l):
-    total = 1
-    for n in l:
-        total *= n
-    return total
-
 numbers = """
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -39,13 +33,13 @@ max_product = 0
 # vertical
 for y in xrange(len(numbers) - 3):
     for x in xrange(len(numbers[0])):
-        prod = product(numbers[y : y + 4, x])
+        prod = np.prod(numbers[y : y + 4, x])
         max_product = prod if prod > max_product else max_product
 
 # horizontal
 for y in xrange(len(numbers)):
     for x in xrange(len(numbers[0]) - 3):
-        prod = product(numbers[y, x : x + 4])
+        prod = np.prod(numbers[y, x : x + 4])
         max_product = prod if prod > max_product else max_product
 
 # diagonals
@@ -53,13 +47,13 @@ for y in xrange(len(numbers) - 3):
     for x in xrange(len(numbers[0]) - 3):
         
         mini_grid = numbers[y : y + 4, x : x + 4]
-        
-        diag_right = np.diag(mini_grid)
-        prod_diag_right = product(diag_right)
+
+        # diag right
+        prod_diag_right = np.prod(np.diag(mini_grid))
         max_product = prod_diag_right if prod_diag_right > max_product else max_product
     
-        diag_left = np.diag(np.fliplr(mini_grid))
-        prod_diag_left = product(diag_left)
+        # diag left
+        prod_diag_left = np.prod(np.diag(np.fliplr(mini_grid)))
         max_product = prod_diag_left if prod_diag_left > max_product else max_product
 
 print max_product
