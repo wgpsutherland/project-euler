@@ -28,19 +28,19 @@ numbers = """
 
 numbers = np.asarray([[int(y) for y in x.split(' ')] for x in numbers.split('\n') if len(x)])
 
-max_product = 0
+max_prod = 0
 
-# vertical
-for y in xrange(len(numbers) - 3):
-    for x in xrange(len(numbers[0])):
-        prod = np.prod(numbers[y : y + 4, x])
-        max_product = prod if prod > max_product else max_product
+# vertical & horizontal
+for y in xrange(0, len(numbers) - 3, 4):
+    for x in xrange(0, len(numbers[0]) - 3, 4):
 
-# horizontal
-for y in xrange(len(numbers)):
-    for x in xrange(len(numbers[0]) - 3):
-        prod = np.prod(numbers[y, x : x + 4])
-        max_product = prod if prod > max_product else max_product
+        mini_grid = numbers[y : y + 4, x : x + 4]
+
+        max_v = max(np.prod(mini_grid, axis=0))
+        max_h = max(np.prod(mini_grid, axis=1))
+
+        max_prod = max_v if max_v > max_prod else max_prod
+        max_prod = max_h if max_h > max_prod else max_prod
 
 # diagonals
 for y in xrange(len(numbers) - 3):
@@ -50,10 +50,10 @@ for y in xrange(len(numbers) - 3):
 
         # diag right
         prod_diag_right = np.prod(np.diag(mini_grid))
-        max_product = prod_diag_right if prod_diag_right > max_product else max_product
+        max_prod = prod_diag_right if prod_diag_right > max_prod else max_prod
     
         # diag left
         prod_diag_left = np.prod(np.diag(np.fliplr(mini_grid)))
-        max_product = prod_diag_left if prod_diag_left > max_product else max_product
+        max_prod = prod_diag_left if prod_diag_left > max_prod else max_prod
 
-print max_product
+print max_prod
