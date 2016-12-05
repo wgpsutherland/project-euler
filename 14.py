@@ -17,8 +17,7 @@
 
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
-memoized = dict()
-memoized[1] = 1
+memoized = {1: 1}
 
 def rule(n):
     return n / 2 if n % 2 == 0 else (n * 3) + 1
@@ -28,13 +27,13 @@ def len_chain(n):
         memoized[n] = 1 + len_chain(rule(n))
     return memoized[n]
 
-max_length = 0
-max_starting_number = 0
+longest_chain = 0
+longest_chain_starting_num = 0
 
 for x in xrange(1, 1000000):
     length = len_chain(x)
-    if length > max_length:
-        max_length = length
-        max_starting_number = x
+    if length > longest_chain:
+        longest_chain = length
+        longest_chain_starting_num = x
 
-print max_starting_number, max_length
+print longest_chain_starting_num, longest_chain
